@@ -1,0 +1,76 @@
+{
+  "schema": "shizune.release/v1",
+  "version": "0.5.0",
+  "tag": "v0.5.0",
+  "date": "2026-10-15",
+  "sha": "b9abf7e6696d51b73f7faccf199b0e368b4c0f10",
+  "changelog": "CHANGELOG.md#050---2026-10-15",
+  "package": {
+    "files": 69,
+    "command": "git ls-files | wc -l"
+  },
+  "evidence": [
+    {
+      "id": "negative-test-assertions",
+      "value": 107,
+      "command": "grep -cE '^\\s*ok\\(' scripts/test-validate-decisions.mjs",
+      "sha": "b9abf7e6696d51b73f7faccf199b0e368b4c0f10",
+      "measured_at": "2026-10-15",
+      "runs_against": "clone"
+    },
+    {
+      "id": "doctor-summary",
+      "value": "8 passaram, 2 n/a",
+      "command": "bun scripts/doctor.mjs",
+      "sha": "b9abf7e6696d51b73f7faccf199b0e368b4c0f10",
+      "measured_at": "2026-10-15",
+      "runs_against": "clone"
+    },
+    {
+      "id": "package-files",
+      "value": 69,
+      "command": "git ls-files | wc -l",
+      "sha": "b9abf7e6696d51b73f7faccf199b0e368b4c0f10",
+      "measured_at": "2026-10-15",
+      "runs_against": "clone"
+    },
+    {
+      "id": "negative-test-output",
+      "value": "ok",
+      "command": "bun scripts/test-validate-decisions.mjs",
+      "sha": "b9abf7e6696d51b73f7faccf199b0e368b4c0f10",
+      "measured_at": "2026-10-15",
+      "capture": "\n[negativo] três classes de defeito, uma por vez\n\n  ok    reprovou commit que cita DEC inexistente (código 1)\n  ok    explicou que o DEC-999 não existe\n  ok    reprovou DEC sem assinante\n  ok    explicou que falta assinante\n  ok    reprovou DEC cuja assinatura não resolve na árvore\n  ok    explicou que o SHA não resolve\n\n[positivo] registro e citação corretos\n\n  ok    aprovou citação legítima (código 0)\n  ok    reconheceu a citação como válida\n\n[rascunho] maquina rascunha, humano assina, SHA ativa\n\n  ok    rascunho SEM referência não reprova (código 0)\n  ok    contou a decisão como rascunho\n  ok    emitiu o aviso de assinatura pendente\n  ok    rascunho REFERENCIADA por commit reprova (código 1)\n  ok    explicou que a decisão citada não está assinada\n  ok    linha sem assinante e sem estado rascunho ainda reprova\n\n[documentação] exemplo dentro de bloco cercado não é decisão\n\n  ok    exemplo cercado com SHA inventado não reprova\n  ok    contou 1 decisão, não 2 — o exemplo ficou de fora\n  ok    não mencionou o SHA do exemplo em lugar nenhum\n  ok    linha defeituosa DEPOIS da cerca fechada continua reprovando\n\n[guarda] o extrator de trailer realmente extraiu\n\n  ok    texto sem trailer não reprova\n  ok    contou zero citações num texto sem trailer\n  ok    aceitou trailer em caixa baixa e com espaços\n\n[fronteira] commit posterior sem assinatura por chave reprova (DEC-007)\n\n  ok    reprovou commit posterior à fronteira sem assinatura\n  ok    explicou a falha pelo conceito de fronteira de autoria\n  ok    disse que falta assinatura confiável\n  ok    contou 0 de 1 assinado\n  ok    o rótulo da linha-resumo acompanha o resultado, não diz ok\n  ok    imprimiu o ambiente de verificação junto da falha\n\n[guarda] o aviso de chave é aviso, não reprovação\n\n  ok    avisou sobre commit sem chave sem reprovar\n\n[exigência] a instância declara que assinar decisão exige chave — e só então reprova\n\n  ok    a mesma citação passa sem exigência e reprova com --exigir-chave\n  ok    explicou que falta chave confiável\n  ok    atribuiu a exigência à instância, não ao framework\n  ok    imprimiu o código %G? do commit reprovado\n  ok    linha vigente sem chave reprova com o arquivo declarado, sem citação e sem fronteira\n  ok    anunciou a exigência declarada pelo arquivo\n  ok    apontou a linha do registro, não uma citação\n  ok    arquivo com token desconhecido reprova\n  ok    explicou que a exigência declarada não foi reconhecida\n  ok    sem o arquivo, a mesma linha volta a passar\n  ok    não anunciou exigência que não existe\n\n[garantia] a garantia de cada decisão é calculada do git, nunca escrita à mão\n\n  ok    --json devolve um objeto com a lista de decisões\n  ok    cada decisão vigente traz id e sha\n  ok    commit sem chave confiável dá garantia nenhuma\n  ok    o resumo conta a garantia por tipo\n  ok    decisão em rascunho não entra na lista de garantias\n\n[delegações] N0 e N1 só existem dentro de uma delegação, e a delegação é decisão assinada\n\n  ok    sem o arquivo de delegações, trailer de nível não reprova\n  ok    anunciou que não há delegação declarada\n  ok    delegação que aponta DEC inexistente reprova\n  ok    disse qual DEC da delegação não existe\n  ok    delegação que aponta DEC em rascunho reprova\n  ok    disse que a DEC da delegação ainda não foi assinada\n  ok    commit N1 com Autorizado-por que bate com uma delegação N1 passa\n  ok    anunciou quantas delegações estão declaradas\n  ok    commit N1 sem Autorizado-por reprova\n  ok    disse que falta o Autorizado-por\n  ok    commit N1 citando DEC que não delega N1 reprova\n  ok    disse que não há delegação daquele nível para aquela DEC\n  ok    trailer Nivel: N2 reprova\n  ok    explicou que N2 se prova pela assinatura, não por trailer\n  ok    linha ininteligível no arquivo de delegações reprova\n  ok    explicou o formato esperado\n\n[chaves] o assinante escrito na linha é conferido contra a chave que assinou (ADR-046)\n\n  ok    o commit humano verifica como G por humana@teste (git disse \"G / humana@teste\")\n  ok    assinante que corresponde à chave passa\n  ok    anunciou que a conferência de chave está ligada\n  ok    o resumo conta a decisão como garantida por chave\n  ok    --json dá garantia chave para a decisão assinada pela chave humana declarada\n  ok    decisão assinada pela chave de máquina não ganha garantia\n  ok    decisão assinada pela chave de máquina reprova\n  ok    explicou que quem assinou foi a chave de máquina\n  ok    rascunho não é alcançado pela regra da chave de máquina\n  ok    assinante declarado que não corresponde à chave reprova\n  ok    disse qual nome a linha declarava\n  ok    disse qual chave de fato assinou\n  ok    assinante fora do mapa não reprova\n  ok    avisou que aquela linha não foi conferida\n  ok    assinante com nome composto é lido, não reprova como linha mal formada\n  ok    e foi de fato conferido contra a chave, não apenas ignorado\n  ok    nome composto apontado para a chave errada continua reprovando\n  ok    linha ininteligível no arquivo de chaves reprova\n  ok    explicou qual é o formato esperado\n  ok    sem o arquivo, assinante nenhum é conferido e nada reprova\n  ok    não anunciou conferência que não existe\n\n[plataforma] merge do GitHub como assinatura: só com a diretiva, e só pelo que ele prova\n\n  ok    o merge simulado verifica como G pela chave da plataforma (git disse \"G / GitHub <noreply@github.com>\")\n  ok    sem a diretiva, merge do GitHub com G não assina decisão\n  ok    disse qual diretiva faltou\n  ok    anunciou que a rota do merge está desligada\n  ok    com a diretiva, o merge feito pelo e-mail declarado assina\n  ok    anunciou a rota ligada e para quantos\n  ok    o merge aceito pela diretiva dá garantia plataforma\n  ok    um commit pode citar a decisão assinada pelo merge\n  ok    a citação diz que a assinatura veio do merge, não de chave\n  ok    merge feito por e-mail diferente do declarado reprova\n  ok    disse quem fez o merge e quem a diretiva declara\n  ok    commit da plataforma com um pai só (squash) reprova\n  ok    explicou que só o merge commit, de dois pais, vale\n  ok    merge feito pelo próprio autor do PR reprova\n  ok    explicou que quem faz o merge precisa ser outra pessoa\n  ok    merge que o ambiente não consegue verificar (E) reprova mesmo com a diretiva\n  ok    explicou o E pela chave da plataforma ausente no gpg\n  ok    não culpou o ssh-keygen pelo E de um merge do GitHub\n  ok    sem diretiva e sem exigência, a citação de merge com E fica no aviso\n  ok    explicou por que o merge do GitHub dá E\n  ok    merge feito por app reprova mesmo com a diretiva apontando para ele\n  ok    disse que quem fez o merge é um app, não uma pessoa\n  ok    diretiva de plataforma desconhecida reprova\n  ok    explicou o formato aceito\n  ok    com o gpg sem a chave da plataforma, a fronteira reprova os commits dela\n  ok    a falha da fronteira explica o E pelo commit da plataforma\n\ntest-validate-decisions: tudo passou.",
+      "runs_against": "clone"
+    }
+  ],
+  "steps": [
+    {
+      "id": "agent-signs-for-owner",
+      "state": "done"
+    },
+    {
+      "id": "poisoned-index-or-memory",
+      "state": "now"
+    },
+    {
+      "id": "forged-attestation",
+      "state": "todo"
+    },
+    {
+      "id": "tampered-generated-rules",
+      "state": "todo"
+    },
+    {
+      "id": "approval-on-autopilot",
+      "state": "todo"
+    },
+    {
+      "id": "long-lived-leaked-key",
+      "state": "todo"
+    }
+  ],
+  "chain": {
+    "state": "todo"
+  }
+}

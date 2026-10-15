@@ -1,0 +1,12 @@
+{
+  "name": "shz-teste-site",
+  "private": true,
+  "type": "module",
+  "description": "Test bed for the Shizune release-to-site chain. Not a real site.",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "portao": "node scripts/build.mjs && node scripts/portao.mjs",
+    "ficha": "node scripts/ficha.mjs",
+    "test-local": "node scripts/test-local.mjs"
+  }
+}

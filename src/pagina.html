@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>shz-teste-site</title>
+    {{jsonld}}
+  </head>
+  <body>
+    {{faixa}}
+    <main>
+      <h1>Test bed for the release-to-site chain</h1>
+      <p>Not a real site. Every number below is read from the release record in <code>src/content/ficha-release.json</code>; none is written by hand.</p>
+      <ul>
+        <li>Files in the package: <strong>{{ficha:package.files}}</strong></li>
+        <li>Negative-test assertions: <strong>{{ficha:evidence.negative-test-assertions}}</strong></li>
+        <li>Release date: <strong>{{ficha:date}}</strong></li>
+        <li>Release commit: <strong>{{ficha:sha7}}</strong></li>
+      </ul>
+    </main>
+    <footer>
+      <p>shz-teste-site</p>
+    </footer>
+  </body>
+</html>

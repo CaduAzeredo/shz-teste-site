@@ -1,0 +1,4 @@
+# A ficha é cópia byte a byte do anexo da release (DEC-026): nenhuma conversão
+# de fim de linha, em máquina nenhuma, senão o sha256 da cópia muda.
+src/content/*.json -text
+* text=auto eol=lf
